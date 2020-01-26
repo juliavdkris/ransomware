@@ -4,6 +4,7 @@ use sodiumoxide::crypto::stream::chacha20;
 
 mod cryptography;
 mod files;
+mod networking;
 
 
 
