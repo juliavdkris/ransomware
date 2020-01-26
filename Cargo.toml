@@ -10,6 +10,11 @@ edition = "2018"
 # Cryptography
 sodiumoxide = "0.2.5"
 x25519-dalek = "0.6.0"
+rand_core = "0.5.1"
+
+# Networking
+reqwest = { version="0.10.1", features=["blocking"] }
+tokio = { version="0.2.10", features=["full"] }
 
 # Other
 base64 = "0.11.0"
