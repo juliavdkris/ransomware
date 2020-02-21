@@ -9,12 +9,11 @@ edition = "2018"
 [dependencies]
 # Cryptography
 sodiumoxide = "0.2.5"
-x25519-dalek = "0.6.0"
-rand_core = "0.5.1"
 
 # Networking
-reqwest = { version="0.10.1", features=["blocking"] }
-tokio = { version="0.2.10", features=["full"] }
+reqwest = { version="0.10.2", features=["blocking"] }
+tokio = { version="0.2.11", features=["full"] }
 
 # Other
 base64 = "0.11.0"
+uuid = { version="0.8.1", features=["v4"] }
