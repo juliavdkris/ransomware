@@ -15,7 +15,7 @@ pub fn get(url: &'static str) -> Result<String, Box<dyn std::error::Error>> {
 	Example
 		post("https://example.com", vec![("key", "value")])
 */
-pub fn post(url: &'static str, params: &Vec<(&'static str, &'static str)>) {
+pub fn post(url: &'static str, params: &Vec<(&'static str, String)>) {
 	let client = reqwest::blocking::Client::new();
 	client.post(url)
 		.form(&params)
