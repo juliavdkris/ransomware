@@ -1,3 +1,6 @@
+use std::collections::HashMap;
+
+
 /*
 	Sends a GET request, returns a result that can be unwrapped
 	Example
@@ -15,10 +18,10 @@ pub fn get(url: &'static str) -> Result<String, Box<dyn std::error::Error>> {
 	Example
 		post("https://example.com", vec![("key", "value")])
 */
-pub fn post(url: &'static str, params: &Vec<(&'static str, String)>) {
+pub fn post(url: &'static str, map: &HashMap<&str, String>) {
 	let client = reqwest::blocking::Client::new();
 	client.post(url)
-		.form(&params)
+		.json(&map)
 		.send()
 		.expect("An error occurred while trying to send a POST request");
 }
