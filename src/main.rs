@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 use sodiumoxide::crypto::stream::chacha20;
+use std::collections::HashMap;
 
 mod cryptography;
 mod files;
@@ -28,10 +29,8 @@ fn main() {
 
 
 	println!("KEY: {:?}", cryptography::chacha_export(&key));
-	let post = vec![
-		("uuid", String::from("abc")),
-		("key", cryptography::chacha_export(&key))
-	];
-	networking::post("http://localhost:8000", &post);
-	// TODO: not saved in keys.json yet?
+	let mut json = HashMap::new();
+	json.insert("uuid", String::from("abc"));
+	json.insert("key", cryptography::chacha_export(&key));
+	networking::post("http://localhost:8000/sendkey", &json);
 }
