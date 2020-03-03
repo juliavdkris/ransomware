@@ -6,7 +6,7 @@ use std::collections::HashMap;
 	Example
 		let body = networking::get("https://example.com").unwrap();
 */
-pub fn get(url: &'static str) -> Result<String, Box<dyn std::error::Error>> {
+pub fn get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 	let body = reqwest::blocking::get(url)?
 		.text()?;
 	Ok(body)
@@ -18,7 +18,7 @@ pub fn get(url: &'static str) -> Result<String, Box<dyn std::error::Error>> {
 	Example
 		post("https://example.com", vec![("key", "value")])
 */
-pub fn post(url: &'static str, map: &HashMap<&str, String>) {
+pub fn post(url: &str, map: &HashMap<&str, String>) {
 	let client = reqwest::blocking::Client::new();
 	client.post(url)
 		.json(&map)

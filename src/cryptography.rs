@@ -7,7 +7,7 @@ use base64;
 	Example
 		let key = cryptography::chacha_import("1dif1PsoJsrk4a+ogwpUDlfHrR7SGhYBHJnASKMmn94=");
 */
-pub fn chacha_import(key_base64: &'static str) -> chacha20::Key {
+pub fn chacha_import(key_base64: &str) -> chacha20::Key {
 	let decoded = base64::decode(&key_base64).unwrap();
 	chacha20::Key::from_slice(&decoded).unwrap()
 }
