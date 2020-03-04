@@ -33,7 +33,7 @@ pub fn read_file(filename: &str) -> io::Result<Vec<u8>> {
 /*
 	Write a bytevector to a file
 	Example
-		files::write_file("test.txt", bytevector).expect("Error writing file.");
+		files::write_file("test.txt", &bytevector).expect("Error writing file.");
 */
 pub fn write_file(filename: &str, content: &Vec<u8>) -> io::Result<()> {
 	let mut buffer = File::create(filename)?;
