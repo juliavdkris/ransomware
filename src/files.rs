@@ -1,7 +1,6 @@
+use std::fs::File;
 use std::io;
 use std::io::prelude::*;
-use std::fs::File;
-
 
 /*
 	List the files in a given directory
@@ -15,7 +14,6 @@ pub fn list_files(dirname: &'static str) -> io::Result<Vec<std::path::PathBuf>> 
 	Ok(entries)
 }
 
-
 /*
 	Read a file to a bytevector
 	Example
@@ -28,7 +26,6 @@ pub fn read_file(filename: &str) -> io::Result<Vec<u8>> {
 	f.read_to_end(&mut buffer)?;
 	Ok(buffer)
 }
-
 
 /*
 	Write a bytevector to a file
