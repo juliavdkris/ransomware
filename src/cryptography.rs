@@ -1,6 +1,5 @@
 use sodiumoxide::crypto::stream::chacha20;
 
-
 /*
 	Import a ChaCha20 key from a base64 string
 	Example
@@ -10,7 +9,6 @@ pub fn chacha_import(key_base64: &str) -> chacha20::Key {
 	let decoded = base64::decode(&key_base64).unwrap();
 	chacha20::Key::from_slice(&decoded).unwrap()
 }
-
 
 /*
 	Export a ChaCha20 key to a base64 string
