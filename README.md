@@ -6,7 +6,7 @@ FileYeeter, like most ransomware uses a hybrid encryption scheme. The "client" g
 
 ## Installation
 If for some reason you would like to ransomwarize yourself, here are the steps to do so:
-1. Set up the [C&C server](https://git.samvanderkris.xyz/sam/ransomware-c2/) (simply set up the virtual environment and run c2.py)
+1. Set up the [C&C server](https://github.com/juliavdkris/ransomware-c2) (simply set up the virtual environment and run c2.py)
 2. Clone this repository
 3. Create a `victim_files` folder in the project directory and throw some files in it
 4. Compile and run the project with `cargo run` (or `cargo run decrypt` to decrypt the files). Alternatively, run `cargo build --release` to build the binary without running it.

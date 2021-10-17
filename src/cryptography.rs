@@ -1,5 +1,4 @@
 use sodiumoxide::crypto::stream::chacha20;
-use base64;
 
 
 /*

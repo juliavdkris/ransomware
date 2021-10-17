@@ -1,23 +1,26 @@
+cargo-features = ["strip"]
+
 [package]
 name = "ransomware"
 version = "0.1.0"
-authors = ["Sam van der Kris <samvdkris@gmail.com>"]
+authors = ["Julia van der Kris <julia@juuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuulia.dev>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 # Cryptography
-sodiumoxide = "0.2.5"
+sodiumoxide = "0.2"
 
 # Networking
-reqwest = { version="0.10.2", features=["blocking", "json"] }
-tokio = { version="0.2.11", features=["full"] }
+reqwest = { version="0.11", features=["blocking", "json"] }
+tokio = { version="1.12", features=["full"] }
 
 # Other
-base64 = "0.11.0"
-uuid = { version="0.8.1", features=["v4"] }
+base64 = "0.13"
+uuid = { version="0.8", features=["v4"] }
 
 
 [profile.release]
-lto = true
+lto = "thin"
+strip = "symbols"

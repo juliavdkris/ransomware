@@ -35,9 +35,9 @@ pub fn read_file(filename: &str) -> io::Result<Vec<u8>> {
 	Example
 		files::write_file("test.txt", &bytevector).expect("Error writing file.");
 */
-pub fn write_file(filename: &str, content: &Vec<u8>) -> io::Result<()> {
+pub fn write_file(filename: &str, content: &[u8]) -> io::Result<()> {
 	let mut buffer = File::create(filename)?;
 
-	buffer.write(&content)?;
+	buffer.write_all(content)?;
 	Ok(())
 }
