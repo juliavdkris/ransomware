@@ -22,7 +22,7 @@ fn encrypt_files() {
 			let filename = file.to_str().unwrap();
 			let newfilename = format!("{}.encrypted", filename);
 
-			let plaintext = files::read_file(&filename).unwrap();
+			let plaintext = files::read_file(filename).unwrap();
 			let encrypted = chacha20::stream_xor(&plaintext, &nonce, &key);
 
 			files::write_file(&newfilename, &encrypted).expect("Error writing file");
@@ -60,7 +60,7 @@ fn decrypt_files() {
 			let filename = file.to_str().unwrap();
 			let newfilename = filename.replace(".encrypted", ""); // If a file already has ".encrypted" in its name we're fucked, but that won't happen anyway, right?
 
-			let encrypted = files::read_file(&filename).unwrap();
+			let encrypted = files::read_file(filename).unwrap();
 			let decrypted = chacha20::stream_xor(&encrypted, &nonce, &key);
 
 			files::write_file(&newfilename, &decrypted).expect("Error writing file");
