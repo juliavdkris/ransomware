@@ -1,0 +1,53 @@
+version: 2.1
+
+orbs:
+  rust: circleci/rust@1.6.0
+
+
+jobs:
+  build:
+    docker:
+      - image: cimg/rust:1.58.0
+    steps:
+      - checkout
+      - rust/build:
+          with_cache: true
+
+  format:
+    docker:
+      - image: cimg/rust:1.58.0
+    steps:
+      - checkout
+      - rust/format:
+          with_cache: true
+
+  clippy:
+    docker:
+      - image: cimg/rust:1.58.0
+    steps:
+      - checkout
+      - rust/clippy:
+          with_cache: true
+
+  test:
+    docker:
+      - image: cimg/rust:1.58.0
+    steps:
+      - checkout
+      - rust/test:
+          with_cache: true
+
+
+workflows:
+  rust:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - format:
+          requires:
+            - build
+      - clippy:
+          requires:
+            - build
